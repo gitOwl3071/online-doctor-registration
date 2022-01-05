@@ -1,0 +1,26 @@
+<div id="doctor-login" class="modal fade" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tab-index="-1" aria-labelledby="doctorLoginForm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-white font-weight-bold" id="doctorLoginForm">Enter your login credentials</h4>
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group mb-3">
+                        <i class="fas fa-envelope fa-lg"></i>
+                        <input type="email" placeholder="Your email id" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <i class="fas fa-lock fa-lg"></i>
+                        <input type="password" placeholder="Your password" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-light rounded-pill"><b>Login</b>&nbsp;<i class="fas fa-sign-in-alt fa-spin"></i></button>
+                <h6 class="text-white">Haven't yet registered ? <button id="openDoctorRegisterForm" type="button" class="btn btn-link link-warning" data-bs-toggle="modal" data-bs-target="#doctor-register" data-bs-dismiss="modal">Click Here</button></h6>
+            </div>
+        </div>
+    </div>
+</div>

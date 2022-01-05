@@ -1,0 +1,24 @@
+.specialist-card {
+    width: 18rem;
+    background-color: #7B68EE;
+    border-style: groove;
+}
+
+i {
+    color: #FFFFFF;
+    text-align: center;       
+}
+
+.specialist-card-title {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.specialist-card-text {
+    color: #FFFFFF;
+}
+
+.btn {
+    background-color: #FFFFFF;
+    color: #7B68EE;
+}

@@ -1,0 +1,12 @@
+.navbar {
+    background-color: #7B68EE;
+    justify-content: space-between;
+}
+
+.container-fluid {
+    margin: auto;
+}
+
+.navbar-toggler-icon {
+    color: #FFFFFF;
+}

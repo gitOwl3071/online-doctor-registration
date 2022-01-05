@@ -1,0 +1,100 @@
+<div *ngIf="!submitted" id="doctor-register" class="modal fade" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="doctorRegisterForm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            <div class="modal-header">
+                <h4 class="modal-title text-white font-weight-bold" id="doctorRegisterForm">Kindly register here</h4>
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit(doctorRegisterForm)" #doctorRegisterForm="ngForm" novalidate>
+                    <div class="form-group mb-3">
+                        <label for="fullName1">Full Name</label>
+                        <input type="text" id="fullName1" name="fullName1" class="form-control" placeholder="Your full name" required [(ngModel)]="_doctorService.selectedDoctor.fullName1" #fullName1="ngModel">
+                        <div [hidden]="fullName1.valid || fullName1.untouched" class="alert alert-danger">
+                            Full name is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="qualification">Qualification</label>
+                        <textarea id="qualification" name="qualification" class="form-control" rows="2" required [(ngModel)]="_doctorService.selectedDoctor.qualification" #qualification="ngModel"></textarea>
+                        <div [hidden]="qualification.valid || qualification.untouched" class="alert alert-danger">
+                            Qualification is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Specialization</label>
+                        <select (blur)="validateSpecialization(specialization.value)" (change)="validateSpecialization(specialization.value)" id="specialization" name="specialization" class="form-select" required [(ngModel)]="_doctorService.selectedDoctor.specialization" #specialization="ngModel">
+                            <option value="default">Choose your specialization</option>
+                            <option *ngFor="let specialization of specializations" [value]="specialization">{{specialization}}</option>                  
+                        </select>
+                        <div [hidden]="!specializationHasError || specialization.untouched" class="alert alert-danger">
+                            Specialization is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="yoe">Years of Experience</label>
+                        <input type="number" id="yoe" name="yoe" class="form-control" placeholder="Your years of experience" required [(ngModel)]="_doctorService.selectedDoctor.yoe" #yoe="ngModel">
+                        <div [hidden]="yoe.valid || yoe.untouched" class="alert alert-danger">
+                            Years of experience is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="city">City</label>
+                        <textarea id="city" name="city" class="form-control" rows="3" required [(ngModel)]="_doctorService.selectedDoctor.city" #city="ngModel"></textarea>
+                        <div [hidden]="city.valid || city.untouched" class="alert alert-danger">
+                            Clinic address is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email1">Email ID</label>
+                        <input type="email" id="email1" name="email1" class="form-control" placeholder="Your email id" ngModel [email]="true" pattern="^.+@gmail.com$" required [(ngModel)]="_doctorService.selectedDoctor.email1" #email1="ngModel">
+                        <div [hidden]="email1.valid || email1.untouched" class="alert alert-danger">
+                            <li>Email id is required</li>
+                            <li>Should be ending with @gmail.com</li>
+                        </div>
+                    </div>  
+                    <div class="form-group mb-3">
+                        <label for="mobileNo1">Mobile No</label>
+                        <input type="tel" id="mobileNo1" name="mobileNo1" class="form-control" placeholder="Your mobile no" pattern="^[6-9]\d{9}$" required [(ngModel)]="_doctorService.selectedDoctor.mobileNo1" #mobileNo1="ngModel">
+                        <div [hidden]="mobileNo1.valid || mobileNo1.untouched" class="alert alert-danger">
+                            <li>Mobile number is required</li>
+                            <li>Should be of 10 digits</li>
+                            <li>Should be starting with 6,7,8 or 9</li>
+                            <li>All inputs should be digits</li>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="fees">Consultation Fees</label>
+                        <input type="number" id="fees" name="fees" class="form-control" placeholder="Your consultation fees" required [(ngModel)]="_doctorService.selectedDoctor.fees" #fees="ngModel">
+                        <div [hidden]="fees.valid || fees.untouched" class="alert alert-danger">
+                            Consultation fees is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="psw1">Create Password</label>
+                        <div class="input-group">
+                            <input [type]="hideShow ? 'text' : 'password'" id="psw1" name="psw1" class="form-control" placeholder="Create password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&])[A-Za-z0-9$!@#$%^&].{7,19}$" required [(ngModel)]="_doctorService.selectedDoctor.psw1" #psw1="ngModel">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fas"[ngClass]="{'fa-eye-slash':!hideShow,'fa-eye':hideShow}" (click)="toggleHideShow()"></i>
+                                </span>
+                            </div>
+                            <div [hidden]="psw1.valid || psw1.untouched" class="alert alert-danger">
+                                <li>Password should be created</li>
+                                <li>Should contain minimum 8 characters</li>
+                                <li>Should contain maximum 20 characters</li>
+                                <li>Should contain at least 1 uppercase alphabet</li>
+                                <li>Should contain at least 1 lowercase alphabet</li>
+                                <li>Should contain at least 1 digit</li>
+                                <li>Should contain at least 1 special character among ! @ # $ % ^ &</li>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button [disabled]="!doctorRegisterForm.form.valid || specializationHasError" (click)="onSubmit(doctorRegisterForm)" type="submit" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#doctor-login"><b>Register</b>&nbsp;</button>
+            </div>
+        </div>
+    </div>
+</div> 

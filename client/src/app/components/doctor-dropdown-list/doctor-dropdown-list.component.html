@@ -1,0 +1,9 @@
+<div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupSelect">
+        <i class="fas fa-user-md" style="color: #7B68EE;"></i>
+    </label>
+    <select class="form-select" id="inputGroupSelect">
+        <option selected>Choose specialists</option>
+        <option *ngFor="let specialist of specialists" [value]="specialist">{{specialist}}</option>
+    </select>
+</div>

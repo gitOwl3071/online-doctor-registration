@@ -1,0 +1,93 @@
+<div *ngIf="!submitted" id="patient-register" class="modal fade" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="patientRegisterForm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-white font-weight-bold" id="patientRegisterForm">Kindly register here</h4>
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit(patientRegisterForm)" #patientRegisterForm="ngForm">
+                    <div class="form-group mb-3">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName2" name="fullName2" class="form-control" placeholder="Your full name" required [(ngModel)]="_patientService.selectedPatient.fullName2" #fullName2="ngModel">
+                        <div [hidden]="fullName2.valid || fullName2.pristine" class="alert alert-danger">
+                            Full name is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" class="form-control" placeholder="Your age" required [(ngModel)]="_patientService.selectedPatient.age" #age="ngModel">
+                        <div [hidden]="age.valid || age.pristine" class="alert alert-danger">
+                            Age is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Gender</label>
+                        <div class="form-check">
+                            <input type="radio" id="gender1" name="gender" class="form-check-input" value="Male" required [(ngModel)]="_patientService.selectedPatient.gender" #gender="ngModel">
+                            <label for="gender1">
+                                Male
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="gender2" name="gender" class="form-check-input" value="option2" required [(ngModel)]="_patientService.selectedPatient.gender" #gender="ngModel">
+                            <label for="gender2">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Blood Group</label>
+                        <select (blur)="validateBloodGroup(bloodGroup.value)" (click)="validateBloodGroup(bloodGroup.value)" id="bloodGroup" name="bloodGroup" class="form-select" required [(ngModel)]="_patientService.selectedPatient.bloodGroup" #bloodGroup="ngModel">
+                            <option value="default">Select your blood group</option>
+                            <option *ngFor="let bloodGroup of bloodGroups" [value]="bloodGroup">{{bloodGroup}}</option>
+                        </select>
+                        <div [hidden]="!bloodGroupHasError || bloodGroup.untouched" class="alert alert-danger">
+                            Blood Group is required
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email2">Email ID</label>
+                        <input type="email" id="email2" name="email2" class="form-control" placeholder="Your email id" ngModel [email]="true" pattern="^.+@gmail.com$" required [(ngModel)]="_patientService.selectedPatient.email2" #email2="ngModel">
+                        <div [hidden]="email2.valid || email2.pristine" class="alert alert-danger">
+                            <li>Email id is required</li>
+                            <li>Should be ending with @gmail.com</li>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="mobileNo2">Mobile No</label>
+                        <input type="text" id="mobileNo2" name="mobileNo2" class="form-control" placeholder="Your mobile number" pattern="^[6-9]\d{9}$" required [(ngModel)]="_patientService.selectedPatient.mobileNo2" #mobileNo2="ngModel">
+                        <div [hidden]="mobileNo2.valid || mobileNo2.pristine" class="alert alert-danger">
+                            <li>Mobile number is required</li>
+                            <li>Should be of 10 digits</li>
+                            <li>Should be starting with 6,7,8 or 9</li>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="psw2">Create Password</label>
+                        <div class="input-group">
+                            <input [type]="hideShow ? 'text' : 'password'" id="psw2" name="psw2" class="form-control" placeholder="Create password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&])[A-Za-z0-9$!@#$%^&].{7,19}$" required [(ngModel)]="_patientService.selectedPatient.psw2" #psw2="ngModel">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fas" [ngClass]="{'fa-eye-slash':!hideShow,'fa-eye':hideShow}" (click)="toggleHideShow()"></i>
+                                </span>
+                            </div>
+                            <div [hidden]="psw2.valid || psw2.pristine" class="alert alert-danger">
+                                <li>Password should be created</li>
+                                <li>Should contain minimum 8 characters</li>
+                                <li>Should contain maximum 20 characters</li>
+                                <li>Should contain  at least 1 uppercase alphabet</li>
+                                <li>Should contain at least 1 lowercase alphabet</li>
+                                <li>Should contain at least 1 digit</li>
+                                <li>Should contain at least 1 special character among ! @ # $ % ^ &</li>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button [disabled]="!patientRegisterForm.form.valid || bloodGroupHasError" (click)="onSubmit(patientRegisterForm)" type="button" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#patient-login"><b>Register</b>&nbsp;</button>
+            </div>
+        </div>
+    </div>
+</div>

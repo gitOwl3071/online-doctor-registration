@@ -1,0 +1,6 @@
+<div class="input-group mb-3">
+    <select class="form-select" id="inputGroupSelect">
+        <option selected>Choose your city</option>
+        <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+    </select>
+</div>
